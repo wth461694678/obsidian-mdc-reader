@@ -3,7 +3,7 @@
 	"name": "MDC File Support",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "Enables Obsidian to browse, view and edit .mdc files just like regular Markdown files.",
+	"description": "Browse, view and edit .mdc files just like regular Markdown files.",
 	"author": "Franklin WTH",
 	"authorUrl": "https://github.com/wth461694678",
 	"isDesktopOnly": false
