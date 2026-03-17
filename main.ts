@@ -1,10 +1,6 @@
 import {
 	Plugin,
 	TFile,
-	ViewState,
-	WorkspaceLeaf,
-	MarkdownView,
-	TAbstractFile,
 	Notice,
 } from "obsidian";
 
@@ -12,15 +8,14 @@ import {
 const MDC_EXTENSION = "mdc";
 
 export default class MDCReaderPlugin extends Plugin {
-	async onload() {
-		console.log("Loading MDC File Support plugin");
+	onload() {
 
 		// Register the .mdc extension so Obsidian treats it as markdown
 		this.registerExtensions([MDC_EXTENSION], "markdown");
 
 		// Add a ribbon icon for quick access info
-		this.addRibbonIcon("file-text", "MDC File Support", () => {
-			new Notice("MDC File Support is active. You can now open .mdc files as Markdown.");
+		this.addRibbonIcon("file-text", "MDC file support", () => {
+			new Notice("MDC file support is active. You can now open .mdc files as Markdown.");
 		});
 
 		// Add command to create a new .mdc file
@@ -40,7 +35,7 @@ export default class MDCReaderPlugin extends Plugin {
 				const activeFile = this.app.workspace.getActiveFile();
 				if (activeFile && activeFile.extension === "md") {
 					if (!checking) {
-						this.convertFile(activeFile, "md", "mdc");
+						void this.convertFile(activeFile, "md", "mdc");
 					}
 					return true;
 				}
@@ -56,7 +51,7 @@ export default class MDCReaderPlugin extends Plugin {
 				const activeFile = this.app.workspace.getActiveFile();
 				if (activeFile && activeFile.extension === "mdc") {
 					if (!checking) {
-						this.convertFile(activeFile, "mdc", "md");
+						void this.convertFile(activeFile, "mdc", "md");
 					}
 					return true;
 				}
@@ -90,11 +85,10 @@ export default class MDCReaderPlugin extends Plugin {
 			})
 		);
 
-		new Notice("MDC File Support plugin loaded.");
 	}
 
 	onunload() {
-		console.log("Unloading MDC File Support plugin");
+		// cleanup
 	}
 
 	/**
