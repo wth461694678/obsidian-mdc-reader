@@ -32,9 +32,6 @@ var MDC_EXTENSION = "mdc";
 var MDCReaderPlugin = class extends import_obsidian.Plugin {
   onload() {
     this.registerExtensions([MDC_EXTENSION], "markdown");
-    this.addRibbonIcon("file-text", "MDC file support", () => {
-      new import_obsidian.Notice("MDC file support is active. You can now open .mdc files as Markdown.");
-    });
     this.addCommand({
       id: "create-new-mdc-file",
       name: "Create new .mdc file",
@@ -123,7 +120,6 @@ alwaysApply: false
       const file = await this.app.vault.create(fullPath, defaultContent);
       const leaf = this.app.workspace.getLeaf(false);
       await leaf.openFile(file);
-      new import_obsidian.Notice(`Created ${fileName}`);
     } catch (error) {
       console.error("Failed to create .mdc file:", error);
       new import_obsidian.Notice("Failed to create .mdc file.");
@@ -140,7 +136,6 @@ alwaysApply: false
         return;
       }
       await this.app.fileManager.renameFile(file, newPath);
-      new import_obsidian.Notice(`Converted ${file.name} to .${toExt}`);
     } catch (error) {
       console.error(`Failed to convert file:`, error);
       new import_obsidian.Notice(`Failed to convert file to .${toExt}`);
